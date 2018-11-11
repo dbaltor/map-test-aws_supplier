@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 set -e
-exec readfile.sh test1.csv | java -Djava.security.egd=file:/dev/./urandom -jar /app.jar both 100 2
+exec ./denis-map-test_aws_supplier-1.0.0/bin/denis-map-test_aws_supplier ./test1.csv

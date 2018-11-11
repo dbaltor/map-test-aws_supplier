@@ -33,7 +33,7 @@ public class Supplier {
   private static long fullWorkWindow = 2 * 60 * 1000; // 2 min in millis
   private static int sleepInterval = 10 * 1000; // 10 sec in millis
   
-  public static final String QUIT = "quit";
+  public static final String POISON_PILL = "quit";
   
   // subclass to supply the events in a different thread
   private static final SupplyTask supplyTask = new SupplyTask();
@@ -77,7 +77,7 @@ public class Supplier {
         // some command received
         if (cmds.stream()
 //              .peek(msg -> System.out.println(msg.body()))
-              .anyMatch(cmd -> cmd.body().equals(QUIT))){
+              .anyMatch(cmd -> cmd.body().equals(POISON_PILL))){
           // command to quit received
           System.out.println("Quiting...");
           System.exit(0);

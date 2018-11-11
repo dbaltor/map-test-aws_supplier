@@ -1,7 +1,9 @@
 group 'dbaltor'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 
 apply plugin: 'application'
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'com.palantir.docker'
 
 mainClassName = 'map.Supplier'
 
@@ -14,14 +16,16 @@ repositories {
 
 buildscript {
   repositories {
-      mavenCentral()
+		mavenCentral()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}	  
   }
   dependencies {
-      classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+		classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+		classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')	  
   }
 }
-
-apply plugin: "io.spring.dependency-management"
 
 dependencyManagement {
   imports {
@@ -42,15 +46,20 @@ jar {
       'Main-Class': 'map.Supplier'
     )
   }
+}
   
-task finalize(type: Exec) {
+task finalise(type: Exec) {
+	dependsOn build
 	commandLine "cmd", "/c", "cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/"
-    println("Will copy ./build/libs/${project.name}-${project.version}.jar to ./build/distributions/${project.name}-${project.version}/lib/")
+    println("Will copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
 }
-//task copyDocs(type: Copy) {
-//    from "./build/libs/${project.name}-${project.version}.jar"
-//    into "./build/distributions/${project.name}-${project.version}/lib/"
-//}
 
+build.finalizedBy(finalise)
+
+docker {
+    dependsOn build
+    name "${project.group}/${project.name}:${project.version}"
+	files tasks.distTar.outputs
+	copySpec.from("files").into(".")
+	buildArgs(['TAR_FILE': "${project.name}-${project.version}.tar"])
 }
-build.finalizedBy(finalize)

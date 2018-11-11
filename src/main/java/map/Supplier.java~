@@ -113,7 +113,7 @@ public class Supplier {
           
           while (remainingWorkWindow.get() > 0 && running.get()) { // Test if should carry on
             
-//            System.out.println("Remaining time for sending messages (ms) = " + remainingWorkWindow.get());
+            System.out.println("Remaining time for sending messages (ms) = " + remainingWorkWindow.get());
             
             // generate one message containing all lines from the file augmented by a random number between 0 and 2
             String msg = lines.stream()
@@ -134,6 +134,7 @@ public class Supplier {
             remainingWorkWindow.getAndAdd(-sleepInterval);
           }
           running.set(false);
+          System.out.println("Work Window has finished...");
         }).start();
       }
     }
