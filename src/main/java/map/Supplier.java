@@ -62,9 +62,9 @@ public class Supplier {
       // Build the SNS client
       supplyTask.snsClient = SnsClient.builder()
         .region(Region.EU_WEST_2)
-        .credentialsProvider(ProfileCredentialsProvider.builder()
-                               .profileName("default")
-                               .build())
+//        .credentialsProvider(ProfileCredentialsProvider.builder()
+//                               .profileName("default")
+//                               .build())
         .build();
       
       while (true) {
