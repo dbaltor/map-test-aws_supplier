@@ -63,3 +63,4 @@ docker {
 	copySpec.from("files").into(".")
 	buildArgs(['TAR_FILE': "${project.name}-${project.version}.tar"])
 }
+dockerfileZip.enabled = false
