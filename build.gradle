@@ -29,7 +29,7 @@ buildscript {
 
 dependencyManagement {
   imports {
-	  mavenBom 'software.amazon.awssdk:bom:2.0.0-preview-12'
+	  mavenBom 'software.amazon.awssdk:bom:2.1.0'
   }
 }
 
