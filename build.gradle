@@ -44,6 +44,7 @@ jar {
     attributes(
       'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
       'Main-Class': 'map.Supplier'
+//      'Main-Class': 'qm.QueueManager'
     )
   }
 }
