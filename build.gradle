@@ -43,7 +43,7 @@ jar {
   manifest {
     attributes(
       'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-      'Main-Class': 'map.Supplier'
+      'Main-Class': "${mainClassName}"
 //      'Main-Class': 'qm.QueueManager'
     )
   }
