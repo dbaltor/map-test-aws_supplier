@@ -7,6 +7,8 @@ The risk areas are transmitted asynchronously via AWS SNS and SQS services and c
 
 *server command line:
 =====================
-./denis-map-test_aws_supplier-1.0.0/bin/denis-map-test_aws_supplier {inputFile}
+./denis-map-test_aws_supplier-1.0.0/bin/denis-map-test_aws_supplier {inputFile} {fullWorkWindow} {sleepInterval}
 <br>*inputFile = Name of the file containing the risk areas locations. Default: ./files/test.csv
-<br>*example: ./denis-map-test_aws_supplier-1.0.0/bin/denis-map-test_aws_supplier ./files/test1.csv
+<br>*fullWorkWindow = Time window in seconds to keep emitting events after being notifed of a new consumer. Default: 120
+<br>*sleepInterval = Interval in seconds between event emissions. Default: 10
+<br>*example: ./denis-map-test_aws_supplier-1.0.0/bin/denis-map-test_aws_supplier ./files/test1.csv 120 10
