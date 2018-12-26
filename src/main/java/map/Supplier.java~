@@ -1,7 +1,8 @@
 
 // Denis test-map event supplier
-// server command line: java -jar ./build/distributions/denis-map-test_aws_supplier-1.0-SNAPSHOT/bin/denis-map-test_aws_supplier <fileName. Default: ./files/test.csv> <fullWorkWindow in sec. Default: 120> <sleepInterval in sec. Default: 10>
-// example: java -jar ./build/distributions/denis-map-test_aws_supplier-1.0-SNAPSHOT/bin/denis-map-test_aws_supplier ./files/test.csv 120 10
+// server command line: java -jar ./build/distributions/denis-map-test_aws_supplier-1.0.0/lib/denis-map-test_aws_supplier-1.0.0.jar <fileName. Default: ./files/test.csv> <fullWorkWindow in sec. Default: 120> <sleepInterval in sec. Default: 10>
+// example: java -jar ./build/distributions/denis-map-test_aws_supplier-1.0.0/lib/denis-map-test_aws_supplier-1.0.0.jar ./files/test.csv 120 10
+// example using script with defaults: ./build/distributions/denis-map-test_aws_supplier-1.0.0/bin/denis-map-test_aws_supplier
 
 package map;
 
@@ -62,9 +63,9 @@ public class Supplier {
       // Build the SNS client
       supplyTask.snsClient = SnsClient.builder()
         .region(Region.EU_WEST_2)
-        .credentialsProvider(ProfileCredentialsProvider.builder()
-                               .profileName("default")
-                               .build())
+//        .credentialsProvider(ProfileCredentialsProvider.builder()
+//                               .profileName("default")
+//                               .build())
         .build();
       
       while (true) {

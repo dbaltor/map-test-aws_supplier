@@ -45,10 +45,10 @@ public class Supplier {
       fileName = args[0];
     }
     if (args.length > 1) {
-      fullWorkWindow = Long.valueOf(args[1]);
+      fullWorkWindow = Long.valueOf(args[1]) * 1000;
     }
     if (args.length > 2) {
-      sleepInterval = Integer.valueOf(args[2]);
+      sleepInterval = Integer.valueOf(args[2]) * 1000;
     }    
     System.out.println("Initializing Messaging Supplier with the following configuration...");
     System.out.println("Topic ARN: " + TOPIC_ARN);
@@ -77,7 +77,7 @@ public class Supplier {
         }
         // some command received
         if (cmds.stream()
-//              .peek(msg -> System.out.println(msg.body()))
+              .peek(msg -> System.out.println(msg.body()))
               .anyMatch(cmd -> cmd.body().equals(POISON_PILL))){
           // command to quit received
           System.out.println("Quiting...");
@@ -88,7 +88,7 @@ public class Supplier {
         supplyTask.remainingWorkWindow.set(Math.max(0, fullWorkWindow - cmds.stream()
                                               .mapToLong(cmd -> System.currentTimeMillis() -
                                                          Long.valueOf(cmd.attributes().get(MessageSystemAttributeName.SENT_TIMESTAMP)))
-//                                            .peek(System.out::println)
+                                              .peek(System.out::println)
                                               .min().getAsLong()));
 
           supplyTask.run();
