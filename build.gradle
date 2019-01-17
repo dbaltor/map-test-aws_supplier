@@ -54,7 +54,7 @@ task finalise(type: Exec) {
 		commandLine "cmd", "/c", "cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/"
 		println("Use -Plocal to copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
 }
-finalise.onlyIf { !project.hasProperty('local') }  // finalise to be executed during local build only
+finalise.onlyIf { project.hasProperty('local') }  // finalise to be executed during local build only
 build.finalizedBy(finalise)
 
 docker {
