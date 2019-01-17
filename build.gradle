@@ -48,13 +48,13 @@ jar {
     )
   }
 }
-  
-task finalise(type: Exec) {
-	dependsOn build
-	commandLine "cmd", "/c", "cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/"
-    println("Will copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
-}
 
+task finalise(type: Exec) {
+		dependsOn build
+		commandLine "cmd", "/c", "cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/"
+		println("Will copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
+}
+finalise.onlyIf { !project.hasProperty('heroku') }  // finalise not be executed during Heroku build
 build.finalizedBy(finalise)
 
 docker {
