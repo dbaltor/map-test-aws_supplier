@@ -53,12 +53,13 @@ task finalise(type: Exec) {
 	dependsOn build
 	if (project.hasProperty('local')) {
 		commandLine "cmd", "/c", "cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/"
-		println("Use -Plocal to copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
+		println("Copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
 	}
 	else {
-		commandLine "tar", "xvf", "./build/distributions/${project.name}-${project.version}"
-		commandLine "sudo", "mv", "./build/distributions/${project.name}-${project.version}/bin/${project.name}-${project.version}", "start.sh"
-		println("Use -Plocal to copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
+		commandLine "tar", "xvf", "./build/distributions/${project.name}-${project.version} -C ."
+		commandLine "mv", "./${project.name}-${project.version}", "dir"
+		commandLine "mv", "./dir/bin/${project.name}", "start.sh"
+		println("Expand tar and rename start script to ./dir/bin/start.sh")
 	}	
 }
 //finalise.onlyIf { project.hasProperty('local') }
