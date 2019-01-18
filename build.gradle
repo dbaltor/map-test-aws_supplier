@@ -57,8 +57,8 @@ task finalise(type: Exec) {
 	}
 	else {
 		commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
-		//commandLine "mv", "./build/distributions/${project.name}-${project.version}", "./build/distributions/dir"
-		//commandLine "mv", "./build/distributions/dir/bin/${project.name}", "./build/distributions/dir/bin/start.sh"
+		commandLine "mv", "${project.name}-${project.version}", "./dir"
+		commandLine "mv", "./dir/bin/${project.name}", "./dir/bin/start.sh"
 		println("Expand tar and rename start script to ./dir/bin/start.sh")
 	}	
 }
