@@ -57,7 +57,7 @@ task finalise(type: Exec) {
 	}
 	else {
 		commandLine "tar", "xvf", "./build/distributions/${project.name}-${project.version}"
-		commandLine "mv", "./build/distributions/${project.name}-${project.version}", "start.sh"
+		commandLine "sudo", "mv", "./build/distributions/${project.name}-${project.version}/bin/${project.name}-${project.version}", "start.sh"
 		println("Use -Plocal to copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
 	}	
 }
