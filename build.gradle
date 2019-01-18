@@ -50,11 +50,18 @@ jar {
 }
 
 task finalise(type: Exec) {
-		dependsOn build
+	dependsOn build
+	if (project.hasProperty('local')) {
 		commandLine "cmd", "/c", "cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/"
 		println("Use -Plocal to copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
+	}
+	else {
+		commandLine "tar", "xvf", "./build/distributions/${project.name}-${project.version}"
+		commandLine "mv", "./build/distributions/${project.name}-${project.version}", "start.sh"
+		println("Use -Plocal to copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
+	}	
 }
-finalise.onlyIf { project.hasProperty('local') }  // finalise to be executed during local build only
+//finalise.onlyIf { project.hasProperty('local') }
 build.finalizedBy(finalise)
 
 docker {
