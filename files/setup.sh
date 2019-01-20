@@ -1,3 +1,3 @@
 #!/bin/sh
 set -e
-exec tar xf ./build/distributions/${project.name}-${project.version}.tar
+exec echo $1; echo $2; tar xf ./build/distributions/$1-$2.tar
