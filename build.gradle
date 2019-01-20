@@ -49,20 +49,37 @@ jar {
   }
 }
 
-task finalise(type: Exec) {
+//task finalise(type: Exec) {
+task finalise {
 	dependsOn build
-	if (project.hasProperty('local')) {
-		commandLine "cmd", "/c", "cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/"
-		println("Copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
+	doLast {
+		if (project.hasProperty('local')) {
+			println("Will copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
+			exec {			
+				commandLine "cmd", "/c", "cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/"
+			}
+		}
+		else {
+			println("Will expand tar and rename start script to ./dir/bin/start.sh")
+			exec {
+				//workingDir 'src/main/app/MYAPP'
+				commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
+			}
+			exec {
+				//workingDir 'src/main/app/MYOTHERAPP'
+				commandLine "mv", "./${project.name}-${project.version}", "./dir"
+			}
+			exec {
+				//workingDir 'src/main/app/MYOTHERAPP'
+				commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
+			}
+		}
 	}
-	else {
-		commandLine "./files/setup.sh", "${project.name}", "${project.version}"
 		//commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 		//commandLine "mv", "./${project.name}-${project.version}", "./dir"
 		//commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
-		println("Expand tar and rename start script to ./dir/bin/start.sh")
-	}	
 }
+
 //finalise.onlyIf { project.hasProperty('local') }
 build.finalizedBy(finalise)
 
