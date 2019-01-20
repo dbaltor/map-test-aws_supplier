@@ -56,7 +56,7 @@ task finalise(type: Exec) {
 		println("Copy generated archive at the end.\n cp ./build/libs/${project.name}-${project.version}.jar ./build/distributions/${project.name}-${project.version}/lib/")
 	}
 	else {
-		commandLine "tar xf ./build/distributions/${project.name}-${project.version}.tar"
+		//commandLine "./files/setup.sh"
 		//commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 		//commandLine "mv", "./${project.name}-${project.version}", "./dir"
 		//commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
