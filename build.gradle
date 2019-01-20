@@ -67,11 +67,11 @@ task finalise {
 			}
 			exec {
 				//workingDir 'src/main/app/MYOTHERAPP'
-				commandLine "mv", "./${project.name}-${project.version}", "./dir"
+				//commandLine "mv", "./${project.name}-${project.version}", "./dir"
 			}
 			exec {
 				//workingDir 'src/main/app/MYOTHERAPP'
-				commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
+				//commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
 			}
 		}
 	}
