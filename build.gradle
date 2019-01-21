@@ -60,14 +60,15 @@ task finalise {
 			}
 		}
 		else {
-			println("Will expand tar and rename start script to ./dir/bin/start.sh")
 			exec {
+				println("Will expand tar and rename start script to ./dir/bin/start.sh")
 				//workingDir 'src/main/app/MYAPP'
 				commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 			}
 			exec {
+				println("Will rename directory ${project.name}-${project.version} to dir")
 				//workingDir 'src/main/app/MYOTHERAPP'
-				commandLine "echo", "${project.name}-${project.version}", "> echo.txt"
+				commandLine "echo", "`pwd`"
 				//commandLine "mv", "./${project.name}-${project.version}", "./dir"
 			}
 			//exec {
