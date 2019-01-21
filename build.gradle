@@ -66,7 +66,7 @@ task finalise {
 				commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 			}
 			println("Will create file /app/files/start.sh")
-			new File("/app/files/start.sh").text = """
+			new File("$projectDir/version.txt").text = """
 			#!/bin/sh
 			set -e
 			exec ./${project.name}-${project.version}/bin/${project.name} ./test1.csv
