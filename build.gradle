@@ -67,9 +67,9 @@ task finalise {
 			}
 			exec {
 				println("Will rename directory ${project.name}-${project.version} to dir")
-				workingDir '/app'
-				//commandLine "pwd"
-				commandLine "mv", "${project.name}-${project.version}", "dir"
+				//workingDir '/app/files'
+				commandLine "echo", "${project.name}-${project.version}", "> projVerName"
+				//commandLine "mv", "${project.name}-${project.version}", "dir"
 			}
 			//exec {
 				//workingDir 'src/main/app/MYOTHERAPP'
