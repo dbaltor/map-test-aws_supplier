@@ -65,8 +65,8 @@ task finalise {
 				//workingDir 'src/main/app/MYAPP'
 				commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 			}
-			println("Will create file ./files/start1.sh")
-			new File(".files/start1.sh").text = """
+			println("Will create file /app/files/start1.sh")
+			new File("/app/files/start1.sh").text = """
 			#!/bin/sh
 			set -e
 			exec ./${project.name}-${project.version}/bin/${project.name} ./test1.csv
