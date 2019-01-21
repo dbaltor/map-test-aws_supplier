@@ -61,31 +61,23 @@ task finalise {
 		}
 		else {
 			exec {
-				println("Will expand tar and rename start script to ./dir/bin/start.sh")
-				//workingDir 'src/main/app/MYAPP'
+				println("Will expand tar file")
+				//workingDir './build/distributions/'
 				commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 			}
-			println("Will create file /app/files/start.sh")
-			new File("$projectDir/files/start1.sh").text = """
+			println("Will create the file ./files/start.sh")
+			new File("$projectDir/files/start.sh").text = """
 			#!/bin/sh
 			set -e
 			exec ./${project.name}-${project.version}/bin/${project.name} ./files/test1.csv
 			"""			
-			//exec {
-				//println("Will rename directory ${project.name}-${project.version} to dir")
-				//workingDir '/app/files'
-				//commandLine "echo", "${project.name}-${project.version}", "> projVerName"
-				//commandLine "mv", "${project.name}-${project.version}", "dir"
-			//}
-			//exec {
-				//workingDir 'src/main/app/MYOTHERAPP'
-				//commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
-			//}
+			exec {
+				println("Will give it run permission")
+				//workingDir './build/distributions/'
+				commandLine "chmod", "a+x", "./files/start.sh"
+			}
 		}
 	}
-		//commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
-		//commandLine "mv", "./${project.name}-${project.version}", "./dir"
-		//commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
 }
 
 //finalise.onlyIf { project.hasProperty('local') }
