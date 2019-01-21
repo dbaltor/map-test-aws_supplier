@@ -73,13 +73,11 @@ task finalise {
 			"""			
 			exec {
 				println("Will give it run permission")
-				//workingDir './build/distributions/'
 				commandLine "chmod", "a+x", "./files/start.sh"
 			}
 		}
 	}
 }
-
 //finalise.onlyIf { project.hasProperty('local') }
 build.finalizedBy(finalise)
 
