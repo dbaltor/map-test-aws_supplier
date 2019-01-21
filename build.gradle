@@ -65,10 +65,11 @@ task finalise {
 				//workingDir 'src/main/app/MYAPP'
 				commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 			}
-			//exec {
+			exec {
 				//workingDir 'src/main/app/MYOTHERAPP'
+				commandLine "echo", "${project.name}-${project.version}", "> echo.txt"
 				//commandLine "mv", "./${project.name}-${project.version}", "./dir"
-			//}
+			}
 			//exec {
 				//workingDir 'src/main/app/MYOTHERAPP'
 				//commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
