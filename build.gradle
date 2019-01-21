@@ -66,10 +66,10 @@ task finalise {
 				commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 			}
 			println("Will create file /app/files/start.sh")
-			new File("$projectDir/version.txt").text = """
+			new File("$projectDir/files/start1.sh").text = """
 			#!/bin/sh
 			set -e
-			exec ./${project.name}-${project.version}/bin/${project.name} ./test1.csv
+			exec ./${project.name}-${project.version}/bin/${project.name} ./files/test1.csv
 			"""			
 			//exec {
 				//println("Will rename directory ${project.name}-${project.version} to dir")
