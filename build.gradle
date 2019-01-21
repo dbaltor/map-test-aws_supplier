@@ -65,12 +65,18 @@ task finalise {
 				//workingDir 'src/main/app/MYAPP'
 				commandLine "tar", "xf", "./build/distributions/${project.name}-${project.version}.tar"
 			}
-			exec {
-				println("Will rename directory ${project.name}-${project.version} to dir")
+			println("Will create file ./files/start1.sh")
+			new File(".files/start1.sh").text = """
+			#!/bin/sh
+			set -e
+			exec ./${project.name}-${project.version}/bin/${project.name} ./test1.csv
+			"""			
+			//exec {
+				//println("Will rename directory ${project.name}-${project.version} to dir")
 				//workingDir '/app/files'
-				commandLine "echo", "${project.name}-${project.version}", "> projVerName"
+				//commandLine "echo", "${project.name}-${project.version}", "> projVerName"
 				//commandLine "mv", "${project.name}-${project.version}", "dir"
-			}
+			//}
 			//exec {
 				//workingDir 'src/main/app/MYOTHERAPP'
 				//commandLine "mv", "./dir/bin/${project.name} ./dir/bin/start.sh"
